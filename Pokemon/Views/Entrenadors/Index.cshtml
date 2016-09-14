@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Pokemon.Models.Entrenador>
+<div class="campo-batalla">
+    @{
+        ViewBag.Title = "Index";
+    }
+    <audio autoplay="true" loop="true" src="../Musica/Guitar_Pokemon.mp3"></audio>
+    <button type="button" data-url="@Url.Content("~/Entrenadors/ShowPoke/")">Pokemons</button>
+
+    <div id="Pokemons">
+
+    </div>
+
+    @section scripts
+    {
+        <script>
+            $('body').on('click', '[data-url]', function () {
+                $.ajax({
+                    method: 'POST',
+                    url: $(this).data('url')
+                })
+                .done(function (data) {
+                    $('#Pokemons').hide();
+                    $('#Pokemons').html(data);
+                    $('#Pokemons').show('fast');
+                });
+            })
+        </script>
+    }
+
+</div>
